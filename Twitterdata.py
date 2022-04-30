@@ -70,3 +70,47 @@ tweet_data.drop(columns=duplicate_cols, inplace=True)
 # null values 
 tweet_data.isnull().sum()
 
+#fill missing columns
+in_reply_to_status_id = tweet_data["in_reply_to_status_id"]
+# fill with my own string
+in_reply_to_status_id.fillna("No reply to this status id")
+#storing data o
+in_reply_to_status_id_str = tweet_data["in_reply_to_status_id_str"]
+# fill with text
+in_reply_to_status_id.fillna("No reply to this status id string")
+#user _id
+in_reply_to_user_id = tweet_data["in_reply_to_user_id"]
+#filna
+in_reply_to_user_id.fillna("No reply to this User id")
+# 
+in_reply_to_user_id_str = tweet_data["in_reply_to_user_id_str"]
+#Replace non values in user_id_str with This string user id has no reply
+in_reply_to_user_id_str.fillna("This string user id has no reply")
+
+#replace of column geo by geography
+geography = tweet_data["geo"]
+#
+geography.isnull().sum()
+
+# now lets remove contributors since it contains nothing
+Contributors = tweet_data["contributors"]
+#this is need to be removed
+tweet_data["contributors"].describe()
+
+"""count    0.0
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+Name: contributors, dtype: float64
+This showw it has to be dropped
+"""
+# droping contibutors
+
+tweet_data.drop(labels='contributors', axis=1)
+# now lets check our data
+tweet_data.columns
+
